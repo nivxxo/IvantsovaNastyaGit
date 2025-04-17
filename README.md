@@ -189,4 +189,35 @@ sudo cp prometheus.yaml /mnt/common_volume/swarm/grafana/config выполняе
 ![image](https://github.com/user-attachments/assets/19541de2-291a-4efa-9291-849f154742ec)
 
 Результат:
+![image](https://github.com/user-attachments/assets/5d674364-5c64-4960-88a4-124c5fa3fb56)
+
+Victoria
+
+Вводим команду echo -e "# TYPE light_metric1 gauge\nlight_metric1 0" | curl --data-binary @- http://localhost:8428/api/v1/import/prometheus которая, отправляет бинарные данные (например, метрики в формате Prometheus) на локальный сервер, который слушает на порту 8428.
+
+![image](https://github.com/user-attachments/assets/93a43d7c-c7d8-4d61-bc5e-91fae0f01118)
+
+Переходим в браузере по ссылке http://localhost:8428/, открывается такое меню в нём нужно выбрать vmui
+
+![image](https://github.com/user-attachments/assets/ced6e2ae-e659-4243-89b8-bf977024e683)
+
+Вписываем light_metric1 и нажимаем Execute Query
+
+![image](https://github.com/user-attachments/assets/68bc218b-7a4d-4a26-9c8f-cd2c1ec46b37)
+
+Переходим на http://localhost:3000 выбираем Dashboard и нажимаем New Dashboard, далее Add Visualization
+
+Вписываем:
+
+Name: VikMetrics
+
+Connection: http://victoriametrics:8428
+
+Нажимаем Save & Test
+
+Вписываем light_metric1, выходит панель с графиком, где есть активность light_metric1
+
+![image](https://github.com/user-attachments/assets/2dee46d3-b757-451b-8976-5cf4c073fa20)
+
+
 
