@@ -219,5 +219,89 @@ Connection: http://victoriametrics:8428
 
 ![image](https://github.com/user-attachments/assets/2dee46d3-b757-451b-8976-5cf4c073fa20)
 
+Устанавливаем по аналогии с первой виртуальной машиной вторую. Устанавливаем гостевые дополнения. 
 
+Устанавливаем утилиту curl, она используется для передачи данных с использованием различных сетевых потоков.
+
+sudo yum install curl
+
+![image](https://github.com/user-attachments/assets/4d4950c1-ab80-4de3-b3b4-109b98a4155a)
+
+Устанавливаем утилиту Wget
+
+sudo yum install wget
+
+![image](https://github.com/user-attachments/assets/82f1f0dd-f27d-4e1f-9db2-34844b4c09c3)
+
+Выполняем клонирование удаленного репозитория git, расположенного по указанному url с помощью команды
+
+git clone https://github.com/skl256/grafana_stack_for_docker.git
+
+![image](https://github.com/user-attachments/assets/32d979d4-950a-45e1-913b-567b323eeae9)
+
+Выполняем команду sudo yum install wget tar. Устанавливает пакеты wget (для загрузки файлов) и tar (для распаковки архивов)
+
+![image](https://github.com/user-attachments/assets/68d8937d-fa28-483c-ad0e-b68ba76400a2)
+
+Устанавливаем Chrony. Chrony — это реализация протокола NTP (Network Time Protocol), которая позволяет синхронизировать системное время с серверами времени в сети. Она особенно полезна в системах, где важно точное время (например, серверы, кластеры, базы данных).
+
+sudo yum install chrony
+
+![image](https://github.com/user-attachments/assets/801ce911-5421-458a-9204-de365428a001)
+
+Включаем Chrony systemctl enable chronyd
+
+![image](https://github.com/user-attachments/assets/78f794c9-6dc5-4af6-8edd-0320d2144ecd)
+
+Запускаем Chrony systemctl start chronyd
+
+![image](https://github.com/user-attachments/assets/7d75fd3f-c541-4a07-ba60-e0fbd614a2e4)
+
+Проверяем включен ли getenforce, в данном случае он включен
+
+![image](https://github.com/user-attachments/assets/07e00a6b-2108-4202-9cb0-6001c401eac2)
+
+Отключаем с помощью двух команд setenforce 0 и sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
+
+![image](https://github.com/user-attachments/assets/23c36caf-28d1-4208-87d0-346459e36142)
+
+![image](https://github.com/user-attachments/assets/2a8933ac-3a58-4eca-b9ab-efdb80441f39)
+
+Скачакиваем Prometheus. 3.3.0 / 2025-04-15 версия. https://prometheus.io/download/ wget https://github.com/prometheus/prometheus/releases/download/v3.3.0/prometheus-3.3.0.linux-amd64.tar.gz
+
+![image](https://github.com/user-attachments/assets/227fde44-2051-46cb-872c-647b4f32c825)
+
+Создание каталогов для Prometheus 
+
+sudo mkdir /etc/prometheus /var/lib/prometheus
+
+![image](https://github.com/user-attachments/assets/f65c526c-c3f7-44a0-90bb-ce86a9d1e111)
+
+Распаковываю архив Prometheus tar -zxf prometheus-*.linux-amd64.tar.gz
+
+![image](https://github.com/user-attachments/assets/a830e3f5-e57e-4cc0-b424-052e869a2958)
+
+Перехожу в распакованную папку cd prometheus-*.linux-amd64
+
+![image](https://github.com/user-attachments/assets/629542f4-efb9-4690-a53d-379e0170233c)
+
+Проверим текущию директорию pwd
+
+![image](https://github.com/user-attachments/assets/7ebc28ec-3c30-4aff-8e3c-e6f23afa64b7)
+
+Раскидаем по папкам системы файлы Prometheus с помощбю команд: sudo cp prometheus promtool /usr/local/bin/ cp prometheus.yml /etc/prometheus/
+
+![image](https://github.com/user-attachments/assets/23f3c724-1056-44d0-88a1-b7b890bbde0f)
+
+Очищаем временные файлы с помощью команды cd .. && rm -rf prometheus-*.linux-amd64/ && rm -f prometheus-*.linux-amd64.tar.gz
+
+![image](https://github.com/user-attachments/assets/8500181f-a984-4a3f-93b2-5f9678ca9b88)
+
+Снова выполняем pwd для повторной проверки директории
+
+![image](https://github.com/user-attachments/assets/8ee3f40c-b71e-43fb-bc21-2f70feaa7c92)
+
+Выполняем ls -l для проверки содержимого в директории
+
+![image](https://github.com/user-attachments/assets/a5450d12-b5e6-4136-bc6f-8b6bbb889805)
 
